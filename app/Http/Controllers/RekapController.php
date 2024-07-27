@@ -127,14 +127,19 @@ class RekapController extends Controller
     public function history(Request $request)
     {
         $search = $request->get('search');
+        $date = $request->get('date');
+    
         $rekaps = Rekap::query()
             ->when($search, function ($query, $search) {
                 return $query->where('nama', 'like', "%{$search}%")
                     ->orWhere('kegiatan', 'like', "%{$search}%")
                     ->orWhere('lokasi', 'like', "%{$search}%");
             })
+            ->when($date, function ($query, $date) {
+                return $query->whereDate('created_at', $date);
+            })
             ->get();
-
-        return view('history', compact('rekaps', 'search'));
+    
+        return view('history', compact('rekaps', 'search', 'date'));
     }
 }

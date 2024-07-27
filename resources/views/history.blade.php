@@ -4,11 +4,24 @@
 <h1 class="h3 mb-4 text-gray-800">History Rekap</h1>
 
 <form method="GET" action="{{ route('history') }}">
-    <div class="form-group">
-        <label for="search">Cari:</label>
-        <input type="text" name="search" id="search" class="form-control" value="{{ request('search') }}" placeholder="Cari berdasarkan nama, kegiatan, atau lokasi">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="search">Cari:</label>
+                <input type="text" name="search" id="search" class="form-control" value="{{ request('search') }}" placeholder="Cari berdasarkan nama, kegiatan, atau lokasi">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="date">Tanggal:</label>
+                <input type="date" name="date" id="date" class="form-control" value="{{ request('date') }}">
+            </div>
+        </div>
     </div>
-    <button type="submit" class="btn btn-primary">Cari</button>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Cari</button>
+        <a href="{{ route('history') }}" class="btn btn-secondary ml-2">Reset</a>
+    </div>
 </form>
 
 @if (session('success'))
