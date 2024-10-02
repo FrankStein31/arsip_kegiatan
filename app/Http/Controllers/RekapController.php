@@ -124,22 +124,44 @@ class RekapController extends Controller
     /**
      * Display the history with search functionality.
      */
+    // public function history(Request $request)
+    // {
+    //     $search = $request->get('search');
+    //     $date = $request->get('date');
+    
+    //     $rekaps = Rekap::query()
+    //         ->when($search, function ($query, $search) {
+    //             return $query->where('nama', 'like', "%{$search}%")
+    //                 ->orWhere('kegiatan', 'like', "%{$search}%")
+    //                 ->orWhere('keterangan', 'like', "%{$search}%")
+    //                 ->orWhere('lokasi', 'like', "%{$search}%");
+    //         })
+    //         ->when($date, function ($query, $date) {
+    //             return $query->whereDate('created_at', $date);
+    //         })
+    //         ->get();
+    
+    //     return view('history', compact('rekaps', 'search', 'date'));
+    // }
+
     public function history(Request $request)
     {
         $search = $request->get('search');
-        $date = $request->get('date');
+        $start_date = $request->get('start_date');
+        $end_date = $request->get('end_date');
     
         $rekaps = Rekap::query()
             ->when($search, function ($query, $search) {
                 return $query->where('nama', 'like', "%{$search}%")
                     ->orWhere('kegiatan', 'like', "%{$search}%")
+                    ->orWhere('keterangan', 'like', "%{$search}%")
                     ->orWhere('lokasi', 'like', "%{$search}%");
             })
-            ->when($date, function ($query, $date) {
-                return $query->whereDate('created_at', $date);
+            ->when($start_date && $end_date, function ($query) use ($start_date, $end_date) {
+                return $query->whereBetween('tanggal', [$start_date, $end_date]);
             })
             ->get();
     
-        return view('history', compact('rekaps', 'search', 'date'));
+        return view('history', compact('rekaps', 'search', 'start_date', 'end_date'));
     }
 }

@@ -5,16 +5,28 @@
 
 <form method="GET" action="{{ route('history') }}">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="form-group">
                 <label for="search">Cari:</label>
-                <input type="text" name="search" id="search" class="form-control" value="{{ request('search') }}" placeholder="Cari berdasarkan nama, kegiatan, atau lokasi">
+                <input type="text" name="search" id="search" class="form-control" value="{{ request('search') }}" placeholder="Cari berdasarkan nama, kegiatan, lokasi, atau keterangan">
             </div>
         </div>
-        <div class="col-md-6">
+        <!-- <div class="col-md-6">
             <div class="form-group">
                 <label for="date">Tanggal:</label>
                 <input type="date" name="date" id="date" class="form-control" value="{{ request('date') }}">
+            </div>
+        </div> -->
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="start_date">Dari Tanggal:</label>
+                <input type="date" name="start_date" id="start_date" class="form-control" value="{{ request('start_date') }}">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="end_date">Sampai Tanggal:</label>
+                <input type="date" name="end_date" id="end_date" class="form-control" value="{{ request('end_date') }}">
             </div>
         </div>
     </div>
@@ -52,7 +64,7 @@
             <table class="table table-bordered" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>No</th>
                         <th>Nama</th>
                         <th>Kegiatan</th>
                         <th>Lokasi</th>
@@ -64,7 +76,7 @@
                 <tbody>
                     @forelse ($rekaps as $rekap)
                     <tr>
-                        <td>{{ $rekap->id }}</td>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{ $rekap->nama }}</td>
                         <td>{{ $rekap->kegiatan }}</td>
                         <td>{{ $rekap->lokasi }}</td>

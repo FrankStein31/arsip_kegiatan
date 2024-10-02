@@ -32,7 +32,7 @@
             <table class="table table-bordered" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>No</th>
                         <th>Nama</th>
                         <th>Kegiatan</th>
                         <th>Lokasi</th>
@@ -45,7 +45,7 @@
                 <tbody>
                     @foreach ($rekaps as $rekap)
                     <tr>
-                        <td>{{ $rekap->id }}</td>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{ $rekap->nama }}</td>
                         <td>{{ $rekap->kegiatan }}</td>
                         <td>{{ $rekap->lokasi }}</td>
