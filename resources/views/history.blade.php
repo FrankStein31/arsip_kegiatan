@@ -8,31 +8,46 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label for="search">Cari:</label>
-                <input type="text" name="search" id="search" class="form-control" value="{{ request('search') }}" placeholder="Cari berdasarkan nama, kegiatan, lokasi, atau keterangan">
+                <input type="text" name="search" id="search" class="form-control" 
+                    value="{{ request('search') }}" placeholder="Cari berdasarkan nama, kegiatan, lokasi, atau keterangan" 
+                    onkeyup="this.form.submit()">
             </div>
         </div>
-        <!-- <div class="col-md-6">
+        <div class="col-md-2">
             <div class="form-group">
-                <label for="date">Tanggal:</label>
-                <input type="date" name="date" id="date" class="form-control" value="{{ request('date') }}">
-            </div>
-        </div> -->
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="start_date">Dari Tanggal:</label>
-                <input type="date" name="start_date" id="start_date" class="form-control" value="{{ request('start_date') }}">
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="end_date">Sampai Tanggal:</label>
-                <input type="date" name="end_date" id="end_date" class="form-control" value="{{ request('end_date') }}">
+                <label for="filter_day">Tanggal:</label>
+                <select name="filter_day" id="filter_day" class="form-control" onchange="this.form.submit()">
+                    <option value="">Pilih Tanggal</option>
+                    @for($i = 1; $i <= 31; $i++)
+                        <option value="{{ $i }}" {{ request('filter_day') == $i ? 'selected' : '' }}>{{ $i }}</option>
+                    @endfor
+                </select>
             </div>
         </div>
-    </div>
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary">Cari</button>
-        <a href="{{ route('history') }}" class="btn btn-secondary ml-2">Reset</a>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="filter_month">Bulan:</label>
+                <select name="filter_month" id="filter_month" class="form-control" onchange="this.form.submit()">
+                    <option value="">Pilih Bulan</option>
+                    @for($i = 1; $i <= 12; $i++)
+                        <option value="{{ $i }}" {{ request('filter_month') == $i ? 'selected' : '' }}>
+                            {{ DateTime::createFromFormat('!m', $i)->format('F') }}
+                        </option>
+                    @endfor
+                </select>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="filter_year">Tahun:</label>
+                <select name="filter_year" id="filter_year" class="form-control" onchange="this.form.submit()">
+                    <option value="">Pilih Tahun</option>
+                    @for($i = 2020; $i <= now()->year; $i++)
+                        <option value="{{ $i }}" {{ request('filter_year') == $i ? 'selected' : '' }}>{{ $i }}</option>
+                    @endfor
+                </select>
+            </div>
+        </div>
     </div>
 </form>
 
