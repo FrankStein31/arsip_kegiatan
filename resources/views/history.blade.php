@@ -3,7 +3,7 @@
 @section('main-content')
 <h1 class="h3 mb-4 text-gray-800">History Rekap</h1>
 
-<form method="GET" action="{{ route('history') }}">
+<!-- <form method="GET" action="{{ route('history') }}">
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
@@ -47,6 +47,40 @@
                     @endfor
                 </select>
             </div>
+        </div>
+    </div>
+</form> -->
+<form method="GET" action="{{ route('history') }}">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="start_date">Dari Tanggal:</label>
+                <input type="date" name="start_date" id="start_date" 
+                       class="form-control" 
+                       value="{{ request('start_date') }}">
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="end_date">Sampai Tanggal:</label>
+                <input type="date" name="end_date" id="end_date" 
+                       class="form-control" 
+                       value="{{ request('end_date') }}">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="search">Pencarian:</label>
+                <input type="text" name="search" id="search" 
+                       class="form-control" 
+                       value="{{ request('search') }}" 
+                       placeholder="Cari berdasarkan nama, kegiatan, lokasi">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-primary">Cari</button>
         </div>
     </div>
 </form>

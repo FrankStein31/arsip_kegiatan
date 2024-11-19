@@ -144,32 +144,33 @@ class RekapController extends Controller
     //     return view('history', compact('rekaps', 'search', 'date'));
     // }
 
+    // In Controller
     public function history(Request $request)
     {
         $search = $request->get('search');
-        $filter_day = $request->get('filter_day');
-        $filter_month = $request->get('filter_month');
-        $filter_year = $request->get('filter_year');
-    
-        $rekaps = Rekap::query()
-            ->when($search, function ($query, $search) {
-                return $query->where('nama', 'like', "%{$search}%")
-                    ->orWhere('kegiatan', 'like', "%{$search}%")
-                    ->orWhere('keterangan', 'like', "%{$search}%")
-                    ->orWhere('lokasi', 'like', "%{$search}%");
-            })
-            ->when($filter_day, function ($query) use ($filter_day) {
-                return $query->whereDay('tanggal', $filter_day);
-            })
-            ->when($filter_month, function ($query) use ($filter_month) {
-                return $query->whereMonth('tanggal', $filter_month);
-            })
-            ->when($filter_year, function ($query) use ($filter_year) {
-                return $query->whereYear('tanggal', $filter_year);
-            })
-            ->get();
-    
-        return view('history', compact('rekaps', 'search', 'filter_day', 'filter_month', 'filter_year'));
-    }    
+        $start_date = $request->get('start_date');
+        $end_date = $request->get('end_date');
+
+        $query = Rekap::query();
+
+        // Search across multiple fields
+        if ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('nama', 'like', "%{$search}%")
+                ->orWhere('kegiatan', 'like', "%{$search}%")
+                ->orWhere('lokasi', 'like', "%{$search}%")
+                ->orWhere('keterangan', 'like', "%{$search}%");
+            });
+        }
+
+        // Date range filtering
+        if ($start_date && $end_date) {
+            $query->whereBetween('tanggal', [$start_date, $end_date]);
+        }
+
+        $rekaps = $query->get();
+
+        return view('history', compact('rekaps', 'search', 'start_date', 'end_date'));
+    }
     
 }
