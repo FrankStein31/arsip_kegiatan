@@ -1,6 +1,6 @@
 /*
-SQLyog Ultimate v13.1.1 (64 bit)
-MySQL - 10.4.32-MariaDB : Database - arsip_kegiatan
+SQLyog Professional v13.1.1 (64 bit)
+MySQL - 8.0.30 : Database - arsip_kegiatan
 *********************************************************************
 */
 
@@ -12,7 +12,7 @@ MySQL - 10.4.32-MariaDB : Database - arsip_kegiatan
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`arsip_kegiatan` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`arsip_kegiatan` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 
 USE `arsip_kegiatan`;
 
@@ -21,36 +21,37 @@ USE `arsip_kegiatan`;
 DROP TABLE IF EXISTS `rekaps`;
 
 CREATE TABLE `rekaps` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `nama` varchar(255) NOT NULL,
-  `kegiatan` varchar(255) NOT NULL,
-  `lokasi` varchar(255) NOT NULL,
-  `tanggal` varchar(255) NOT NULL,
-  `keterangan` text NOT NULL,
-  `dokumentasi` varchar(255) NOT NULL,
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `nama` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `kegiatan` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `lokasi` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `tanggal` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `keterangan` text COLLATE utf8mb4_general_ci NOT NULL,
+  `dokumentasi` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `rekaps` */
 
 insert  into `rekaps`(`id`,`nama`,`kegiatan`,`lokasi`,`tanggal`,`keterangan`,`dokumentasi`,`created_at`,`updated_at`) values 
-(2,'Fidya','Bersih Bersih Desa','Mojoroto','2024-07-19','gotong royong','dokumentasi/vmXO212jvFpEeEXFRDjVQBTRpKB9uHVELmRg9XQ3.jpg','2024-07-19 08:33:28','2024-07-19 10:52:42'),
-(6,'Regina','Patroli','Kediri','2024-07-01','Keliling kediri kota','dokumentasi/76O4aCWbdqZqXBguW97lliGPMXG3Itu0va9h9690.jpg','2024-07-19 10:56:02','2024-07-19 10:56:02');
+(7,'Pak Didik','Pengecekan Traficc light','Jalan Sawojajar','2024-11-16','Mengganti Traffic light yang baru','dokumentasi/ocCfjJMD3mbaMfX3B6QPkxUQrbz2eQxOtsGghNgS.jpg','2024-11-19 15:33:05','2024-11-19 15:34:34'),
+(8,'Pak Rio','Perawatan Traffic Light','Jalan Soekarno Hatta','2024-11-17','Pengecekan Arus Listrik Pada Traffic Light','dokumentasi/krLPS9h2HVMLOelqwBHEFasMnahEPof29YXCKUz3.jpg','2024-11-19 15:44:10','2024-11-19 15:44:10'),
+(9,'Pak Didik','Perawatan Rambu Jalan','Jalan Kaliurang','2024-11-18','Perbaikan Papan Rambu','dokumentasi/NTyJZdpNY34ArBbgVgqrMuozUHLNGS7ynacfR9qj.jpg','2024-11-19 15:48:39','2024-11-19 15:48:39');
 
 /*Table structure for table `users` */
 
 DROP TABLE IF EXISTS `users`;
 
 CREATE TABLE `users` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `last_name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `last_name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) NOT NULL,
-  `remember_token` varchar(100) DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
